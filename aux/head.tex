@@ -1,0 +1,113 @@
+\usepackage{amsthm,amsmath,amsfonts,amscd}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\tikzset{snake it/.style={decorate, decoration=snake}}
+\tikzset{->-/.style={decoration={
+              markings,
+              mark=at position .5 with {\arrow{>}}},postaction={decorate}}}
+\tikzset{->>-/.style={decoration={
+              markings,
+              mark=at position .5 with {\arrow{>>}}},postaction={decorate}}}
+\tikzset{->>>-/.style={decoration={
+              markings,
+              mark=at position .5 with {\arrow{>>>}}},postaction={decorate}}}
+\tikzset{->>>>-/.style={decoration={
+              markings,
+              mark=at position .5 with {\arrow{>>>>}}},postaction={decorate}}}
+\newcommand{\conic}[1]{
+\begin{scope}[shift={#1}]
+\filldraw[fill=white,draw=none] (-0.5,-0.5) to[out=45,in=-45] (-0.5,0.5) -- (0.5,0.5) to[out=-135,in=135] (0.5,-0.5) -- (-0.5,-0.5);
+\filldraw[fill=white] (0,0.5) circle [x radius=0.5,y radius=0.25];
+\filldraw[fill=white,dashed] (-0.5,-0.5) arc [x radius=0.5,y radius=0.25,start angle=180,end angle=0];
+\filldraw[fill=white] (-0.5,-0.5) arc [x radius=0.5,y radius=0.25,start angle=180,end angle=360];
+\draw (-0.5,-0.5) to[out=45,in=-45] (-0.5,0.5);
+\draw (0.5,-0.5) to[out=135,in=-135] (0.5,0.5);
+\end{scope}
+}
+\newcommand{\nodalconic}[1]{
+\begin{scope}[shift={#1}]
+\filldraw[fill=white,draw=none] (-0.5,-0.5) -- (0,0) -- (0.5,-0.5) -- cycle;
+\filldraw[fill=white,draw=none] (-0.5,0.5) -- (0,0) -- (0.5,0.5) -- cycle;
+\filldraw[fill=white] (0,0.5) circle [x radius=0.5,y radius=0.25];
+\filldraw[fill=white,dashed] (-0.5,-0.5) arc [x radius=0.5,y radius=0.25,start angle=180,end angle=0];
+\filldraw[fill=white] (-0.5,-0.5) arc [x radius=0.5,y radius=0.25,start angle=180,end angle=360];
+\draw (-0.5,-0.5) -- (0.5,0.5);
+\draw (-0.5,0.5) -- (0.5,-0.5);
+\end{scope}
+}
+\newcommand{\circdash}[4]{
+\begin{scope}[shift={#1},scale=#2,rotate=#4]
+\draw[#3,dashed] (-1,0) arc [x radius=1,y radius=0.5,start angle=180,end angle=0];
+\draw[#3] (1,0) arc [x radius=1,y radius=0.5,start angle=0,end angle=-180];
+\end{scope}
+}
+\definecolor{dg}{HTML}{228B22}
+\usepackage{bm}
+\usepackage{pinlabel}
+\usepackage{parskip}
+\usepackage{ragged2e}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage[utf8]{inputenc}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\XX}{\mathbf{X}}
+\newcommand{\YY}{\mathbf{Y}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\cp}[1]{\mathbf{CP}^{#1}}
+\newcommand{\rp}[1]{\mathbf{RP}^{#1}}
+\newcommand{\OP}[1]{\mathrm{#1}}
+\newcommand{\matr}[4]{\left(\begin{array}{cc}#1 & #2\\ #3 & #4\end{array}\right)}
+\newcommand{\mthrthr}[9]{\left(\begin{array}{ccc}#1 & #2 & #3\\ #4 & #5 & #6\\ #7 & #8 & #9\end{array}\right)}
+\newcommand{\vect}[2]{\left(\begin{array}{c}#1\\#2\end{array}\right)}
+\newcommand{\vthr}[3]{\left(\begin{array}{c}#1\\#2\\#3\end{array}\right)}
+\newcommand{\TO}[3]{#1\stackrel{#2}{\longrightarrow}#3}
+\newenvironment{Proof}{\begin{proof}}{\end{proof}\ignorespacesafterend}
+\begingroup
+    \makeatletter
+    \@for\theoremstyle:=definition,remark,plain\do{%
+        \expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{%
+            \addtolength\thm@preskip\parskip
+            }%
+        }
+\endgroup
+\usepackage{graphicx}
+\usepackage[capitalise,noabbrev]{cleveref}
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem*{Theorem*}{Theorem}
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+\newtheorem{Claim}[Theorem]{Claim}
+\newtheorem{Proposition}[Theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{Remark}[Theorem]{Remark}
+\theoremstyle{definition}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem{Example}[Theorem]{Example}
+\newtheorem{Exercise}[Theorem]{Exercise}
+\crefname{Theorem}{Theorem}{Theorems}
+\Crefname{Theorem}{Theorem}{Theorems}
+\crefname{Lemma}{Lemma}{Lemmas}
+\Crefname{Lemma}{Lemma}{Lemmas}
+\crefname{Corollary}{Corollary}{Corollaries}
+\Crefname{Corollary}{Corollary}{Corollaries}
+\crefname{Claim}{Claim}{Claims}
+\Crefname{Claim}{Claim}{Claims}
+\crefname{Proposition}{Proposition}{Propositions}
+\Crefname{Proposition}{Proposition}{Propositions}
+\crefname{Remark}{Remark}{Remarks}
+\Crefname{Remark}{Remark}{Remarks}
+\crefname{Definition}{Definition}{Definitions}
+\Crefname{Definition}{Definition}{Definitions}
+\crefname{Example}{Example}{Examples}
+\Crefname{Example}{Example}{Examples}
+\crefname{Exercise}{Exercise}{Exercises}
+\Crefname{Exercise}{Exercise}{Exercises}
+\setcounter{tocdepth}{1}
